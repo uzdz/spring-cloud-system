@@ -1,6 +1,7 @@
 package com.help.user.controller;
 
 import com.help.user.clients.CommonClient;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,5 +21,16 @@ public class UserController {
     @GetMapping("/testSuccess")
     public String success() {
         return commonClient.success();
+    }
+
+    @GetMapping("/failed")
+    @HystrixCommand(fallbackMethod = "failedError")
+    public String failed() {
+        //return commonClient.success();
+        throw new RuntimeException("手动抛出错误！");
+    }
+
+    public String failedError() {
+        return "failed error";
     }
 }

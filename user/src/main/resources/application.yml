@@ -10,3 +10,16 @@ eureka:
     instance-id: user
   client:
     service-url: {"defaultZone" : "http://eureka-7001.com:7001/eureka/,http://eureka-7002.com:7002/eureka/"}
+
+feign:
+  hystrix:
+    enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+  server:
+    servlet:
+      context-path: /

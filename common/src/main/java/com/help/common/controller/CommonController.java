@@ -19,6 +19,7 @@ public class CommonController {
 
     @GetMapping("/testSuccess")
     public String success() {
-        return userClient.success();
+        throw new RuntimeException("配合Hystrix测试服务降级。");
+        //return userClient.success();
     }
 }
