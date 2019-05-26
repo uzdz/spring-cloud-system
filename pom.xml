@@ -6,12 +6,12 @@
     <groupId>com.help</groupId>
     <artifactId>parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <name>system</name>
     <description>Demo project for Spring Boot</description>
 
     <modules>
-        <module>client</module>
         <module>common</module>
         <module>eureka-server-7001</module>
         <module>eureka-server-7002</module>

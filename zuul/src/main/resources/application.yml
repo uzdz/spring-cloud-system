@@ -2,21 +2,26 @@ spring:
   application:
     name: geteway
 
-
 server:
   port: 8080
+
 eureka:
   instance:
     instance-id: geteway
-    prefer-ip-address: true # SpringCloud Eureka Client IP注册
   client:
-    service-url:
-      defaultZone: http://eureka-7001.com:7001/eureka,http://eureka-7002.com:7002/eureka
+    service-url: {"defaultZone" : "http://eureka-7001.com:7001/eureka/,http://eureka-7002.com:7002/eureka/"}
+
 zuul:
   routes:
     common:
-      path: /abc/*
-      url: http://localhost:8082/
+      path: /baidu/** # 当请求第一位为baidu时，转发到url的host上
+      url: https://www.baidu.com # 与path参数配合使用
+    user_rout:
+      path: /users/** # 当请求第一位为users时，转发到serviceId下的服务列表上
+      serviceId: user # 在eureka中的application name
+  ignored-patterns:
+    - /**/testSuccess # 忽略匹配的url，支持正则表达式，当请求地址匹配设置的模式后，不进行处理
+  sensitive-headers: # 设置敏感头过滤为空，默认会过滤掉"Cookie", "Set-Cookie", "Authorization"且不会将值传递给后端服务
 
 ribbon:
   ReadTimeout: 60000
