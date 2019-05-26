@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: geteway
+
+
+server:
+  port: 8080
+eureka:
+  instance:
+    instance-id: geteway
+    prefer-ip-address: true # SpringCloud Eureka Client IP注册
+  client:
+    service-url:
+      defaultZone: http://eureka-7001.com:7001/eureka,http://eureka-7002.com:7002/eureka
+zuul:
+  routes:
+    common:
+      path: /abc/*
+      url: http://localhost:8082/
+
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000

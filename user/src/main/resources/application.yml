@@ -1,0 +1,12 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: user
+
+eureka:
+  instance:
+    instance-id: user
+  client:
+    service-url: {"defaultZone" : "http://eureka-7001.com:7001/eureka/,http://eureka-7002.com:7002/eureka/"}
