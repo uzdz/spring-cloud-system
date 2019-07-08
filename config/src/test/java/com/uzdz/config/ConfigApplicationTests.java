@@ -1,4 +1,4 @@
-package com.help.config;
+package com.uzdz.config;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package com.help.config;
+package com.uzdz.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

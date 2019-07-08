@@ -5,11 +5,11 @@ spring:
   application:
     name: config
   cloud:
-      config:
-        server:
-          git:
-            uri: https://gitee.com/fox9916/springCloudConfig
-            search-paths: /**
+    config:
+      server:
+        git:
+          uri: https://gitee.com/fox9916/springCloudConfig
+          search-paths: /**
       lable: master
 
 eureka:
