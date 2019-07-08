@@ -1,4 +1,4 @@
-package com.help.common;
+package com.uzdz.common;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

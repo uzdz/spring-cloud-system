@@ -1,4 +1,4 @@
-package com.help.common;
+package com.uzdz.common;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

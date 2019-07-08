@@ -1,4 +1,4 @@
-package com.help.common.clients;
+package com.uzdz.common.clients;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
