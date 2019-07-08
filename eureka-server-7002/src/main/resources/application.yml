@@ -3,15 +3,17 @@ server:
 
 spring:
   application:
-    name: eureka7002
+    name: eureka
 
 eureka:
   instance:
-    hostname: eureka-7002.com
+    hostname: eureka-7002.com # 主机名称，当prefer-ip-address = true时，会通过hostname注册
+    prefer-ip-address: false # true时注册到Eureka Server上的是IP
+    instance-id: server-7002 # 注册到eureka上的示例名称
   client:
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: true
+    fetch-registry: true
     service-url: {"defaultZone" : "http://eureka-7001.com:7001/eureka/"}
   server:
-    enable-self-preservation: false
+    enable-self-preservation: false # 关闭自我保护机制
 

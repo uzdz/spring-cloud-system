@@ -1,5 +1,5 @@
 server:
-  port: 7099
+  port: 9998
 
 spring:
   application:
@@ -8,6 +8,7 @@ spring:
     gateway:
       discovery:
         locator:
+          enabled: true
           lowerCaseServiceId: true
       routes:
       - id: dongzhen_gateway
@@ -22,11 +23,17 @@ spring:
         - Path=/uzdz1/*
         filters:
         - Authorize=true,uzdz
+      - id: gateway
+        uri: lb://user
+        order: 1 #如果命中多个route，则order最小的会被执行
+        predicates:
+        - Path=/users/*
+        filters:
+        - StripPrefix=1
 
 
 eureka:
   instance:
-    hostname: gateway # 服务注册中心实例的主机名
+    instance-id: gateway
   client:
-    service-url:
-      defaultZone: http://eureka-7001.com:7001/eureka,http://eureka-7002.com:7002/eureka
+    service-url: {"defaultZone" : "http://eureka-7001.com:7001/eureka/,http://eureka-7002.com:7002/eureka/"}

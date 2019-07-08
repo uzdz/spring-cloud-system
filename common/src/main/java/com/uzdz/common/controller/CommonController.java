@@ -19,7 +19,11 @@ public class CommonController {
 
     @GetMapping("/testSuccess")
     public String success() {
-        // 调用user服务的success接口
+        return "common success";
+    }
+
+    @GetMapping("/testUserSuccess")
+    public String userSuccess() {
         return userClient.success();
     }
 }

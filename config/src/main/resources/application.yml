@@ -8,13 +8,14 @@ spring:
     config:
       server:
         git:
-          uri: https://gitee.com/fox9916/springCloudConfig
-          search-paths: /**
-      lable: master
+          uri: 'https://github.com/uzdz/simple-springcloud-config.git'
+          search-paths: /{application}
+          strict-host-key-checking: false
+          force-pull: true
 
 eureka:
   instance:
-    hostname: config # 服务注册中心实例的主机名
+    instance-id: config # 服务注册中心实例的主机名
   client:
     service-url:
       defaultZone: http://eureka-7001.com:7001/eureka,http://eureka-7002.com:7002/eureka

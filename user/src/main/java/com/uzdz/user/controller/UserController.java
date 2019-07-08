@@ -3,6 +3,7 @@ package com.uzdz.user.controller;
 import com.uzdz.user.clients.CommonClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,9 +19,18 @@ public class UserController {
     @Autowired
     private CommonClient commonClient;
 
+    @Value("${author.name}")
+    private String authorName;
+
     @GetMapping("/testSuccess")
     public String success() {
-        return commonClient.success();
+        return "user success";
+    }
+
+    @GetMapping("/authorName")
+    public String getAuthorName() {
+        // 通过spring cloud config 获取作者名称
+        return authorName;
     }
 
     @GetMapping("/failed")

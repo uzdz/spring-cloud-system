@@ -3,11 +3,11 @@ spring:
     name: zuul
 
 server:
-  port: 8080
+  port: 9999
 
 eureka:
   instance:
-    instance-id: zull
+    instance-id: zuul
   client:
     service-url: {"defaultZone" : "http://eureka-7001.com:7001/eureka/,http://eureka-7002.com:7002/eureka/"}
 
