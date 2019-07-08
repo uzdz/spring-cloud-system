@@ -1,0 +1,32 @@
+server:
+  port: 7099
+
+spring:
+  application:
+      name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+      routes:
+      - id: dongzhen_gateway
+        uri: http://baidu.com
+        order: 10
+        predicates:
+        - Path=/uzdz1/*
+      - id: uzdz_gateway
+        uri: http://github.com/
+        order: 5 #如果命中多个route，则order最小的会被执行
+        predicates:
+        - Path=/uzdz1/*
+        filters:
+        - Authorize=true,uzdz
+
+
+eureka:
+  instance:
+    hostname: gateway # 服务注册中心实例的主机名
+  client:
+    service-url:
+      defaultZone: http://eureka-7001.com:7001/eureka,http://eureka-7002.com:7002/eureka
