@@ -1,4 +1,4 @@
-package com.system.zuul.config;
+package com.uzdz.zuul.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

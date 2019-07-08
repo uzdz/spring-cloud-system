@@ -1,4 +1,4 @@
-package com.system.zuul;
+package com.uzdz.zuul;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

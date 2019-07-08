@@ -1,4 +1,4 @@
-package com.system.zuul;
+package com.uzdz.zuul;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
