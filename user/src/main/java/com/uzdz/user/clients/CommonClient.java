@@ -1,4 +1,4 @@
-package com.help.user.clients;
+package com.uzdz.user.clients;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.help.user;
+package com.uzdz.user;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
