@@ -10,18 +10,23 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @date: 2019/5/26 16:55
  * @since 0.1.0
  */
-@FeignClient(name = "common", fallback = CommonClient.CommonClientFallback.class)
+
+@Component
+@FeignClient(name = "common") // fallback = CommonClient.CommonClientFallback.class
 public interface CommonClient {
 
     @GetMapping("/testSuccess")
     String success();
 
-    @Component
-    class CommonClientFallback implements CommonClient {
+    @GetMapping("/peerError")
+    String peerError();
 
-        @Override
-        public String success() {
-            return "failed";
-        }
-    }
+//    @Component
+//    class CommonClientFallback implements CommonClient {
+//
+//        @Override
+//        public String success() {
+//            return "failed";
+//        }
+//    }
 }

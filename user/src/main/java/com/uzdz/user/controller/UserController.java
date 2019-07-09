@@ -3,6 +3,7 @@ package com.uzdz.user.controller;
 import com.uzdz.user.clients.CommonClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.skywalking.apm.toolkit.trace.ActiveSpan;
+import org.apache.skywalking.apm.toolkit.trace.Trace;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,7 +40,35 @@ public class UserController {
 
         System.out.printf("shywalking trace id is : " + TraceContext.traceId());
 
+        return authorName;
+    }
+
+    @Trace
+    @GetMapping("/getCommonSuccess")
+    public String getCommonSuccess() {
+        // 通过spring cloud config 获取作者名称
+
+        ActiveSpan.info("this is shywalking common success info");
+
+        ActiveSpan.tag("this is shywalking tag", "user -> common");
+
+        System.out.println("shywalking trace id is : " + TraceContext.traceId());
+
         return commonClient.success();
+    }
+
+    @Trace
+    @GetMapping("/getCommonError")
+    public String getCommonError() {
+        // 通过spring cloud config 获取作者名称
+
+        ActiveSpan.info("this is shywalking common error info");
+
+        ActiveSpan.tag("this is shywalking tag", "user -> common");
+
+        System.out.println("shywalking trace id is : " + TraceContext.traceId());
+
+        return commonClient.peerError();
     }
 
     @GetMapping("/failed")
