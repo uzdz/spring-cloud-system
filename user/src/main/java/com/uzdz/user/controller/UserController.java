@@ -2,6 +2,8 @@ package com.uzdz.user.controller;
 
 import com.uzdz.user.clients.CommonClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.apache.skywalking.apm.toolkit.trace.ActiveSpan;
+import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,14 @@ public class UserController {
     @GetMapping("/authorName")
     public String getAuthorName() {
         // 通过spring cloud config 获取作者名称
-        return authorName;
+
+        ActiveSpan.info("this is shywalking info");
+
+        ActiveSpan.tag("this is shywalking tag", "uzdz");
+
+        System.out.printf("shywalking trace id is : " + TraceContext.traceId());
+
+        return commonClient.success();
     }
 
     @GetMapping("/failed")

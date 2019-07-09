@@ -42,6 +42,12 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.skywalking</groupId>
+            <artifactId>apm-toolkit-trace</artifactId>
+            <version>6.2.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
