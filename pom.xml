@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.uzdz</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>simple-springcloud-study-all</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -16,7 +16,9 @@
         <module>server-7001</module>
         <module>server-7002</module>
         <module>user</module>
+        <module>gateway</module>
         <module>config-server</module>
+        <module>zuul</module>
     </modules>
 
     <parent>
