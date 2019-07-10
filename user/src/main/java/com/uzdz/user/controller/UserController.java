@@ -2,6 +2,10 @@ package com.uzdz.user.controller;
 
 import com.uzdz.user.clients.CommonClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.uzdz.user.jpa.UserRepository;
+import io.lettuce.core.RedisClient;
+import io.lettuce.core.RedisFuture;
+import io.lettuce.core.api.async.RedisAsyncCommands;
 import org.apache.skywalking.apm.toolkit.trace.ActiveSpan;
 import org.apache.skywalking.apm.toolkit.trace.Trace;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
@@ -9,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.sql.Connection;
+import java.util.concurrent.ExecutionException;
 
 /**
  * 用户Controller
@@ -24,6 +31,12 @@ public class UserController {
 
     @Value("${author.name}")
     private String authorName;
+
+    @Autowired(required = false)
+    private RedisClient redisClient;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/testSuccess")
     public String success() {
@@ -69,6 +82,26 @@ public class UserController {
         System.out.println("shywalking trace id is : " + TraceContext.traceId());
 
         return commonClient.peerError();
+    }
+
+    @GetMapping("/redisInfo")
+    public String getRedisInfo() throws ExecutionException, InterruptedException {
+
+        if (redisClient == null) {
+            return "failed start redis client";
+        }
+
+        RedisAsyncCommands<String, String> async = redisClient.connect().async();
+
+        RedisFuture<String> info = async.info();
+
+        return info.get();
+    }
+
+    @GetMapping("/getAllUsers")
+    public Object getAllUsers() {
+
+        return userRepository.findAll();
     }
 
     @GetMapping("/failed")
