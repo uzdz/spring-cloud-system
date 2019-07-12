@@ -1,5 +1,7 @@
 package com.uzdz.user.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.uzdz.user.clients.CommonClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.uzdz.user.jpa.UserRepository;
@@ -72,16 +74,23 @@ public class UserController {
 
     @Trace
     @GetMapping("/getCommonError")
+    @SentinelResource(value = "commonError", fallback = "helloFallback", blockHandler = "exceptionHandler")
     public String getCommonError() {
-        // 通过spring cloud config 获取作者名称
+        throw new RuntimeException("aaa");
+    }
 
-        ActiveSpan.info("this is shywalking common error info");
+    // 1.6.2后支持注解熔断和阻塞处理
 
-        ActiveSpan.tag("this is shywalking tag", "user -> common");
+    // Block 异常处理函数，参数最后多一个 BlockException，其余与原函数一致.
+    public String exceptionHandler(BlockException ex) {
+        // Do some log here.
+        ex.printStackTrace();
+        return "block exception";
+    }
 
-        System.out.println("shywalking trace id is : " + TraceContext.traceId());
-
-        return commonClient.peerError();
+    // Fallback 函数，函数签名与原函数一致或加一个 Throwable 类型的参数.
+    public String helloFallback() {
+        return "fallback error";
     }
 
     @GetMapping("/redisInfo")
