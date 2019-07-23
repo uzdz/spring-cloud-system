@@ -8,8 +8,8 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
-          lowerCaseServiceId: true
+          enabled: true # 开启服务注册与发现，并为每个服务创建route
+          lowerCaseServiceId: true # 创建的每个route的服务名转换成小写
       routes:
       - id: dongzhen_gateway
         uri: http://baidu.com
