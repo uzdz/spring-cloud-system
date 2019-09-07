@@ -19,6 +19,8 @@
         <module>gateway</module>
         <module>config-server</module>
         <module>zuul</module>
+        <module>member-nacos</module>
+        <module>member-coin-nacos</module>
     </modules>
 
     <parent>
@@ -40,6 +42,14 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>Greenwich.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>0.2.2.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
