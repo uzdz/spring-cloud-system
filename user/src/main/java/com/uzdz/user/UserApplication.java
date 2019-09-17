@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients
 @SpringCloudApplication
-@EnableCircuitBreaker
+@EnableHystrix
 public class UserApplication {
 
     public static void main(String[] args) {

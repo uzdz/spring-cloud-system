@@ -1,4 +1,9 @@
 spring:
+  rabbitmq:
+    port: 5672
+    username: guest
+    password: guest
+    host: localhost
   application:
     name: user
   cloud:
@@ -13,12 +18,14 @@ spring:
         max-attempts: 9
         max-interval: 20000
         multiplier: 1.2
+    bus:
+      enabled: true
 
 management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream
+        include: hystrix.stream, refresh
   server:
     servlet:
       context-path: /

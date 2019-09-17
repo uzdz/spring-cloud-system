@@ -12,6 +12,13 @@ spring:
           search-paths: /{application}
           strict-host-key-checking: false
           force-pull: true
+    bus:
+      enabled: true
+  rabbitmq:
+    port: 5672
+    username: guest
+    password: guest
+    host: localhost
 
 eureka:
   instance:
@@ -20,3 +27,8 @@ eureka:
     service-url:
       defaultZone: http://eureka-7001.com:7001/eureka,http://eureka-7002.com:7002/eureka
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
