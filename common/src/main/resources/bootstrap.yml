@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: common
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config
+      label: master
+      profile: dev
+      retry:
+        initial-interval: 20000
+        max-attempts: 9
+        max-interval: 20000
+        multiplier: 1.2
+    bus:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream, refresh
+  server:
+    servlet:
+      context-path: /
+
+eureka:
+  instance:
+    instance-id: common
+  client:
+    service-url: {"defaultZone" : "http://eureka-7001.com:7001/eureka/,http://eureka-7002.com:7002/eureka/"}

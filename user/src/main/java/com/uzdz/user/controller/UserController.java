@@ -8,9 +8,6 @@ import com.uzdz.user.jpa.UserRepository;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisFuture;
 import io.lettuce.core.api.async.RedisAsyncCommands;
-import org.apache.skywalking.apm.toolkit.trace.ActiveSpan;
-import org.apache.skywalking.apm.toolkit.trace.Trace;
-import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -50,31 +47,15 @@ public class UserController {
     @GetMapping("/authorName")
     public String getAuthorName() {
         // 通过spring cloud config 获取作者名称
-
-        ActiveSpan.info("this is shywalking info");
-
-        ActiveSpan.tag("this is shywalking tag", "uzdz");
-
-        System.out.printf("shywalking trace id is : " + TraceContext.traceId());
-
         return authorName;
     }
 
-    @Trace
     @GetMapping("/getCommonSuccess")
     public String getCommonSuccess() {
         // 通过spring cloud config 获取作者名称
-
-        ActiveSpan.info("this is shywalking common success info");
-
-        ActiveSpan.tag("this is shywalking tag", "user -> common");
-
-        System.out.println("shywalking trace id is : " + TraceContext.traceId());
-
         return commonClient.success();
     }
 
-    @Trace
     @GetMapping("/getCommonError")
     @SentinelResource(value = "commonError", fallback = "helloFallback", blockHandler = "exceptionHandler")
     public String getCommonError() {
