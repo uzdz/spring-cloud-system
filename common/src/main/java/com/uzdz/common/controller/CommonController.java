@@ -1,7 +1,9 @@
 package com.uzdz.common.controller;
 
 import com.uzdz.common.clients.UserClient;
-import org.apache.skywalking.apm.toolkit.trace.Trace;
+import com.uzdz.common.jpa.JobRepository;
+import com.uzdz.common.jpa.po.Job;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,13 +20,24 @@ public class CommonController {
     @Autowired(required = false)
     private UserClient userClient;
 
-    @Trace
+    @Autowired
+    JobRepository jobRepository;
+
     @GetMapping("/testSuccess")
     public String success() {
         return "common success";
     }
 
-    @Trace
+    @GlobalTransactional(name = "updateJob")
+    @GetMapping("/update")
+    public String updateJob() {
+
+        Job job = jobRepository.findById(1).get();
+        job.setName("dev");
+        jobRepository.save(job);
+        return "success";
+    }
+
     @GetMapping("/peerError")
     public String peerError() {
         throw new RuntimeException("手动测试异常!");

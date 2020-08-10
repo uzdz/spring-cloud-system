@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {com.alibaba.cloud.seata.GlobalTransactionAutoConfiguration.class})
 @EnableDiscoveryClient
 @EnableFeignClients
 public class CommonApplication {

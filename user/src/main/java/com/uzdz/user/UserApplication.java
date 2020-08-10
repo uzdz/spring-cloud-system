@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableHystrix
-@SpringBootApplication
+@SpringBootApplication(exclude = {com.alibaba.cloud.seata.GlobalTransactionAutoConfiguration.class})
 @EnableDiscoveryClient
 @EnableFeignClients
 public class UserApplication {

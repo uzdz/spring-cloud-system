@@ -5,16 +5,20 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.uzdz.user.clients.CommonClient;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.uzdz.user.jpa.UserRepository;
+import com.uzdz.user.jpa.po.User;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisFuture;
 import io.lettuce.core.api.async.RedisAsyncCommands;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Connection;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -94,6 +98,23 @@ public class UserController {
     public Object getAllUsers() {
 
         return userRepository.findAll();
+    }
+
+    @GlobalTransactional(name = "updateUser")
+    @GetMapping("/update")
+    public Object updateUser() {
+        Optional<User> byId = userRepository.findById(1);
+        User user = byId.get();
+        user.setRemark("beijing");
+        userRepository.save(user);
+
+        String s = commonClient.updateJob();
+
+        if (s.equals("success")) {
+            int i = 1/0;
+        }
+
+        return s;
     }
 
     @GetMapping("/failed")

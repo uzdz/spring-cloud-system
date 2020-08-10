@@ -18,6 +18,9 @@ public interface CommonClient {
     @GetMapping("/testSuccess")
     String success();
 
+    @GetMapping("/update")
+    String updateJob();
+
     @GetMapping("/peerError")
     String peerError();
 
